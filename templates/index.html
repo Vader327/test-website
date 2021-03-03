@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Duru+Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>    
+    <link href='https://fonts.googleapis.com/css?family=Raleway:400,500' rel='stylesheet'>
+
+    <title>Website</title>
+
+    <link href="{{ url_for('static',filename='home.css') }}" rel='stylesheet'>
+
+    <body>
+        <div class="menu">
+            <button onclick="toggleMenu()" id="menuButton">
+                <div id="first" class="firstUnactive"></div>
+                <div id="second" class="secondUnactive"></div>
+                <div id="third" class="thirdUnactive"></div>
+            </button>
+        </div>
+
+        <div class="main" id="home">
+            <div id="centerText">
+                <h1 style="font-size: 40px;">Website <span style="font-weight: 200;">Name</span></h1>
+                <p style="font-size: 17px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer odio augue, facilisis sagittis interdum et, cursus in arcu. Phasellus sit amet posuere sapien.</p>
+                <button><a href="{{ url_for('services') }}">Learn More</a></button>
+            </div>
+        </div>
+
+        <div class="main" id="services" style="z-index: -2;">
+            <!--<iframe width="100%" height="100%" src="https://www.youtube.com/embed/nOcVOJw3Gfw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>-->
+            <!--<embed src="http://stackoverflow.com" width=100% height=100% />-->
+        </div>
+
+        <div class="main" id="about" style="z-index: -3;">
+            <div id="centerText">
+                <h1 style="font-size: 40px;">About Us</h1>
+            </div>
+        </div>
+
+        <div class="main" id="follow" style="z-index: -4;">
+            <div id="centerText">
+                <h1 style="font-size: 40px;">Follow Us</h1>
+            </div>
+        </div>
+
+        <div class="main" id="contact" style="z-index: -5;">
+            <div id="centerText">
+                <h1 style="font-size: 40px;">Contact Us</h1>
+            </div>
+        </div>
+
+        <div class="sideMenu">
+            <a onmouseover="hover(0)" onmouseleave="down(0)" onclick="openPage(0)">Home</a>
+            <a onmouseover="hover(1)" onmouseleave="down(1)" onclick="openPage(1)">Services</a>
+            <a onmouseover="hover(2)" onmouseleave="down(2)">About Us</a>
+            <a onmouseover="hover(3)" onmouseleave="down(3)">Follow Us</a>
+            <a onmouseover="hover(4)" onmouseleave="down(4)">Contact Us</a>
+        </div>
+    </body>
+
+    <script>
+        function toggleMenu(){
+            document.getElementsByClassName("firstUnactive")[0].classList.toggle("firstActive");
+            document.getElementsByClassName("secondUnactive")[0].classList.toggle("secondActive");
+            document.getElementsByClassName("thirdUnactive")[0].classList.toggle("thirdActive");
+
+            for(var x=0; x<5; x++){
+                var window = document.getElementsByClassName("main")[x]
+                window.classList.toggle("main-active");
+                window.style.animation = "none"
+            }
+        }
+
+        function hover(number){
+            document.getElementsByClassName("main-active")[number].classList.toggle("main-active-hover");
+        }
+        function down(number){
+            var window = document.getElementsByClassName("main-active")[number];
+            if(window){
+                (document.getElementsByClassName("main-active")[number]).classList.remove("main-active-hover");
+            }
+        }
+
+        function openPage(number){
+            down(number);
+            if(number == 0){
+                setTimeout(toggleMenu, 500);
+            }
+
+            if(number !== 0){
+                var window = document.getElementsByClassName("main-active")[number];
+                //window.style.zIndex = "1";
+                window.style.animation = "comeAhead 3s forwards"
+                setTimeout(toggleMenu, 5000);
+            }
+        }
+    </script>
+</head>
+</html>
